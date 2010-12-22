@@ -58,7 +58,7 @@ module Netzke
     end
 
     def self.reset_components_in_session
-      Netzke::Core.session[:netzke_components].try(:clear)
+      #Netzke::Core.session[:netzke_components].try(:clear)
     end
   end
 end
