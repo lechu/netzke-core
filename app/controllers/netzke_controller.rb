@@ -78,7 +78,7 @@ class NetzkeController < ApplicationController
              headers['Content-Disposition'] = 'attachment; filename="report.xls"'
              headers['Cache-Control'] = ''
              endpoint_action = action.to_s.index('__') ? action : "_#{action}_xls_ep_wrapper"
-             render :text => w_instance.send(endpoint_action, params), :layout => false 
+             send_file w_instance.send(endpoint_action, params)
           }
        end
     else
