@@ -60,11 +60,6 @@ class NetzkeController < ApplicationController
   # as well as the method of this component to be called, according to the double underscore notation.
   # E.g.: some_grid__post_grid_data.
   def method_missing(method_name)
-    postfix = ''
-    respond_to do |format|
-       format.html
-       format.xls { postfix = '_xls' }
-    end
     component_name, *action = method_name.to_s.split('__')
     component_name = component_name.to_sym
     action = !action.empty? && action.join("__").to_sym
@@ -72,8 +67,17 @@ class NetzkeController < ApplicationController
     if action
       w_instance = Netzke::Base.instance_by_config(Netzke::Core.session[:netzke_components][component_name])
       # only component's actions starting with "endpoint_" are accessible from outside (security)
-      endpoint_action = action.to_s.index('__') ? action : "_#{action}#{postfix}_ep_wrapper"
-      render :text => w_instance.send(endpoint_action, params), :layout => false
+      
+       respond_to do |format|
+          format.html { 
+             endpoint_action = action.to_s.index('__') ? action : "_#{action}_ep_wrapper"
+             render :text => w_instance.send(endpoint_action, params), :layout => false 
+          }
+          format.xls {
+             endpoint_action = action.to_s.index('__') ? action : "_#{action}_xls_ep_wrapper"
+             render :text => w_instance.send(endpoint_action, params), :layout => false 
+          }
+       end
     else
       super
     end
