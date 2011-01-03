@@ -40,7 +40,11 @@ module Netzke
         # define_method name, &block if block # if no block is given, the method is supposed to be defined elsewhere
         define_method :"_#{name}_ep_wrapper" do |*args|
           res = send("#{name}_endpoint", *args)
-          res.respond_to?(:to_nifty_json) && res.to_nifty_json || ""
+          unless res.respond_to?(:xls)
+             res.respond_to?(:to_nifty_json) && res.to_nifty_json || ""
+          else
+             res
+          end
         end
       end
 
