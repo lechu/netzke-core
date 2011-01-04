@@ -43,8 +43,11 @@ module Netzke
           #unless res.respond_to?(:xls)
           #   res.respond_to?(:to_nifty_json) && res.to_nifty_json || ""
           #else
-          res
-          #end
+          if res.respond_to?(:xls) 
+             res
+          else
+             res.respond_to?(:to_nifty_json) && res.to_nifty_json || ""
+          end
         end
       end
 
