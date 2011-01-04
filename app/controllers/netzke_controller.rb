@@ -74,11 +74,11 @@ class NetzkeController < ApplicationController
              render :text => w_instance.send(endpoint_action, params), :layout => false 
           }
           format.xls {
-             headers['Content-Type'] = "application/vnd.ms-excel"
-             headers['Content-Disposition'] = 'attachment; filename="report.xls"'
-             headers['Cache-Control'] = ''
+             #headers['Content-Type'] = "application/vnd.ms-excel"
+             #headers['Content-Disposition'] = 'attachment; filename="report.xls"'
+             #headers['Cache-Control'] = ''
              endpoint_action = action.to_s.index('__') ? action : "_#{action}_xls_ep_wrapper"
-             send_file w_instance.send(endpoint_action, params)
+             send_data w_instance.send(endpoint_action, params), :type=>"application/vnd.ms-excel", :disposition=>'attachment', :filename => 'raport.xls'
           }
        end
     else
