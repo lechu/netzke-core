@@ -13,7 +13,7 @@ Ext.ns('Ext.netzke'); // namespace for extensions that depend on Ext
 Netzke.isLoading=function () {
   return Netzke.runningRequests!=0;
 }
-Netzke.runningRequests=0
+Netzke.runningRequests=0;
 
 Netzke.deprecationWarning = function(msg){
   if (typeof console == 'undefined') {
