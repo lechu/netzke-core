@@ -42,7 +42,7 @@ module Netzke
 
             res << "Ext.onReady(function(){"
             res << content_for(:netzke_on_ready)
-            res << "}, window, {delay: 100, single: true});"
+            res << "});"
 
             javascript_tag res.join("\n")
           end
