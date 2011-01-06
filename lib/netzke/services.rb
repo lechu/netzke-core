@@ -43,7 +43,7 @@ module Netzke
           #unless res.respond_to?(:xls)
           #   res.respond_to?(:to_nifty_json) && res.to_nifty_json || ""
           #else
-          if name.to_s.match(/^.*_xls$/)
+          if name.to_s.match(/^.*_xls$/) || name.to_s.match(/^.*_pdf$/)
              res
           else
              res.respond_to?(:to_nifty_json) && res.to_nifty_json || ""
