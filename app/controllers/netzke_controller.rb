@@ -1,5 +1,5 @@
 class NetzkeController < ApplicationController
-
+  prawnto :prawn => { :top_margin => 75 }
   # Collect javascripts and stylesheets from all plugins that registered it in Netzke::Core.javascripts
   # TODO: caching
   # caches_action :netzke
@@ -79,6 +79,11 @@ class NetzkeController < ApplicationController
              #headers['Cache-Control'] = ''
              endpoint_action = action.to_s.index('__') ? action : "_#{action}_xls_ep_wrapper"
              send_data w_instance.send(endpoint_action, params), :type=>"application/vnd.ms-excel", :disposition=>'attachment', :filename => 'raport.xls'
+          }
+	  format.pdf {
+             endpoint_action = action.to_s.index('__') ? action : "_#{action}_pdf_ep_wrapper"
+             @data = w_instance.send(endpoint_action, params)
+             #send_data render(:layout => false), :type=>"application/pdf", :disposition=>'attachment', :filename => 'raport.pdf'
           }
        end
     else
