@@ -80,7 +80,7 @@ class NetzkeController < ApplicationController
              endpoint_action = action.to_s.index('__') ? action : "_#{action}_pdf_ep_wrapper"
              @data = w_instance.send(endpoint_action, params)
              #send_data render(:layout => false), :type=>"application/pdf", :disposition=>'attachment', :filename => 'raport.pdf'
-             render :text => @data, :layout => false 
+             render :layout => false 
           }
        end
     else
