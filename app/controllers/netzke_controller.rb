@@ -1,5 +1,4 @@
 class NetzkeController < ApplicationController
-  prawnto :prawn => { :top_margin => 75 }
   # Collect javascripts and stylesheets from all plugins that registered it in Netzke::Core.javascripts
   # TODO: caching
   # caches_action :netzke
