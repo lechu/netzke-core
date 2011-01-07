@@ -93,7 +93,7 @@ class NetzkeController < ApplicationController
 	  format.pdf {
              endpoint_action = action.to_s.index('__') ? action : "_#{action}_pdf_ep_wrapper"
              @data = w_instance.send(endpoint_action, params)
-             html = render 'to_pdf', :layout => false 
+             html = render_to_string 'to_pdf', :layout => false 
              kit = PDFKit.new(html)
              send_data(kit.to_pdf, :filename => "raport.pdf", :type => 'application/pdf')
           }
